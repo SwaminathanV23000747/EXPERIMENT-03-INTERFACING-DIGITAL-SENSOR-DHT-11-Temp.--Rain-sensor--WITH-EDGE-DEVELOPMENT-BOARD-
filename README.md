@@ -43,7 +43,8 @@ A rain sensor is one kind of switching device which is used to detect the rainfa
 
 <img width="443" height="266" alt="image" src="https://github.com/user-attachments/assets/c9750628-c41f-4181-8dcd-e07873d227d9" />
 
-<img width="694" height="203" alt="image" src="https://github.com/user-attachments/assets/7c4711c0-774a-47f4-a836-eb80f1215aff" />
+<img width="393" height="120" alt="image" src="https://github.com/user-attachments/assets/997aa631-9647-42cc-94d6-754742f7bf18" />
+
 
  ### FIGURE-03 Rain Sensor (LM393) Rain Sensor Module & connection diagram
 
