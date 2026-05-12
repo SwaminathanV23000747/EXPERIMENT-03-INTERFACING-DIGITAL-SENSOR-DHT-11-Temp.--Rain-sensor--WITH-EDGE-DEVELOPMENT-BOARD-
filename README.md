@@ -1,4 +1,4 @@
- # EXPERIMENT-04-INTERFACING-DIGITAL-SENSOR-DHT-11-Soil-Moisture-sensor--WITH-EDGE-DEVELOPMENT-BOARD-
+ # EXPERIMENT-04-INTERFACING-DIGITAL-SENSOR-DHT-11-Temperature-Sensor-and-Rain-sensor-WITH-EDGE-DEVELOPMENT-BOARD-
 
 ---
 
@@ -10,13 +10,13 @@
 ---
 
 ## **AIM:**  
-To interface an **Temperature and humidity sensor (DHT 11) Soil Moisture Sensor (REES52)** with the **Raspberry Pi 4** and display the sensor readings using HiveMQ cloud.
+To interface an **Temperature and humidity sensor (DHT 11) Rain Sensor (LM393)** with the **Raspberry Pi 4** and display the sensor readings using HiveMQ cloud.
 
 ---
 
 ## **APPARATUS REQUIRED:**  
 1. Raspberry Pi 4  
-2. Temperature and Humidity sensor (DHT-11) and Soil Moisture Sensor (REES52)  
+2. Temperature and Humidity sensor (DHT-11) and Rain Sensor (LM393)  
 3. Jumper Wires  
 4. Breadboard  
 5. USB Cable  
@@ -37,11 +37,15 @@ The DHT11 is a low-cost digital sensor used to measure ambient temperature and r
 
 ### FIGURE-02 Temperature and Humidity Sensor (DHT-11)
 
-## Soil Moisture Sensor (REES52):
-The Soil Moisture Sensor (REES52) is a low-cost resistive-type sensor used to measure the volumetric water content present in soil. It operates on the principle that the electrical conductivity of soil changes with moisture level—wet soil conducts electricity better than dry soil due to the presence of water acting as a conductor between the probe electrodes. The module typically consists of two exposed metal probes and a control board with a comparator (often based on LM393), providing both analog output (for precise moisture level measurement) and digital output (for threshold-based detection). It operates at 3.3V–5V, making it compatible with microcontrollers such as Arduino and Raspberry Pi, and is widely used in irrigation control systems, smart agriculture, and automated plant watering applications.
-<img width="800" height="800" alt="image" src="https://github.com/user-attachments/assets/32b40be6-1781-4459-9035-464b6064ec0f" />
+## Rain Sensor (LM393):
+A rain sensor is one kind of switching device which is used to detect the rainfall. It works like a switch and the working principle of this sensor is, whenever there is rain, the switch will be normally closed. The rain sensor module/board is shown below. Basically, this board includes nickel coated lines and it works on the resistance principle. This sensor module permits to gauge moisture through analog output pins & it gives a digital output while moisture threshold surpasses. This module is similar to the LM393 IC because it includes the electronic module as well as a PCB. Here PCB is used to collect the raindrops. When the rain falls on the board, then it creates a parallel resistance path to calculate through the operational amplifier. This sensor is a resistive dipole, and based on the moisture only it shows the resistance. For example, it shows more resistance when it is dry and shows less resistance when it is wet..
+<img width="525" height="240" alt="image" src="https://github.com/user-attachments/assets/fdf4df13-4659-46ed-bbab-44bbae5a360f" />
 
- ### FIGURE-03 Soil Moisture Sensor (REES52) 
+<img width="443" height="266" alt="image" src="https://github.com/user-attachments/assets/c9750628-c41f-4181-8dcd-e07873d227d9" />
+
+<img width="694" height="203" alt="image" src="https://github.com/user-attachments/assets/7c4711c0-774a-47f4-a836-eb80f1215aff" />
+
+ ### FIGURE-03 Rain Sensor (LM393) Rain Sensor Module & connection diagram
 
 ## Working Principle:
 Experiment 4A
@@ -54,14 +58,13 @@ Connect the OUT to any one GPIO.
 
 
 Experiment 4B
-The Soil Moisture Sensor (REES52) D0 is connected one of the GPIO pins in Raspberry Pi 4.
-The Soil Moisture Sensor (REES52) A0 is connected one of the GPIO pins in Raspberry Pi 4.
-The Python script sets the Soil Moisture Sensor (REES52) value based on the variation in the temparature and humdity (Dry or Wet) and shown in HiveMQ Cloud and console.
+The Rain Sensor (LM393) D0 is connected one of the GPIO pins in Raspberry Pi 4.
+The Python script sets the Rain Sensor (LM393) value based on the variation in the rain water (Dry or Wet) and shown in HiveMQ Cloud and console.
 CIRCUIT DIAGRAM
-Connect the Soil Moisture Sensor (REES52) Vcc to any +5V.
-Connect the Soil Moisture Sensor (REES52) GND to any GND.
-Connect the Soil Moisture Sensor (REES52) D0 to any one GPIO. 
-Connect the Soil Moisture Sensor (REES52) A0 to any one GPIO. 
+Connect the Rain Sensor (LM393) Vcc to any +5V.
+Connect the Rain Sensor (LM393) GND to any GND.
+Connect the Rain Sensor (LM393) D0 to any one GPIO. 
+
 
 Experiment 4A
 ## PROGRAM (Python)
@@ -108,7 +111,7 @@ Experiment 4B
 
 
 ## **RESULT:**  
-The **Temperature and humidity sensor (DHT 11) Soil Moisture Sensor (REES52)** was successfully interfaced with the **Raspberry Pi 4**, and real-time **Temperature, Humidity and Soil Moisture level** were read and displayed in Console and HiveMq Cloud. 
+The **Temperature and humidity sensor (DHT 11) Rain Sensor (LM393)** was successfully interfaced with the **Raspberry Pi 4**, and real-time **Temperature, Humidity and Rain status** were read and displayed in Console and HiveMq Cloud. 
 
 ---
 
