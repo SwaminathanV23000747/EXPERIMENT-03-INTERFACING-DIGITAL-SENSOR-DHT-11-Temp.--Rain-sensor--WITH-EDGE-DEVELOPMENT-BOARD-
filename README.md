@@ -2,10 +2,10 @@
 
 ---
 
-### **NAME:**  
-### **DEPARTMENT:**  
-### **ROLL NO:**  
-### **DATE OF EXPERIMENT:**  
+### **NAME: Swaminathan.V**  
+### **DEPARTMENT: CSE-IOT**  
+### **ROLL NO: 212223110057**  
+### **DATE OF EXPERIMENT:12/05/2026**  
 
 ---
 
@@ -70,23 +70,53 @@ Connect the Rain Sensor (LM393) D0 to any one GPIO.
 Experiment 4A
 ## PROGRAM (Python)
 ```
-
-
- 
-
-
-
+import Adafruit_DHT
+import paho.mqtt.client as mqtt
+import ssl
+import time
+# ---------------- DHT11 Setup ----------------
+DHT_SENSOR = Adafruit_DHT.DHT11
+DHT_PIN = 18 # GPIO4
+# ---------------- HiveMQ Cloud Credentials ----------------
+MQTT_BROKER = "c13064a8e3a0486283c8ea6a9e976744.s1.eu.hivemq.cloud"
+MQTT_PORT = 8883
+MQTT_USER = "hivemq.webclient.1778575720539"
+MQTT_PASSWORD = "H0gUSR,M:.j9Z17tkfz$"
+TEMP_TOPIC = "raspberrypi/dht/temperature"
+HUM_TOPIC = "raspberrypi/dht/humidity"
+client = mqtt.Client()
+client.username_pw_set(MQTT_USER, MQTT_PASSWORD)
+client.tls_set(tls_version=ssl.PROTOCOL_TLS)
+client.connect(MQTT_BROKER, MQTT_PORT)
+print("Connected to HiveMQ Cloud")
+print("Reading DHT11 Sensor...\n")
+while True:
+	humidity, temperature = Adafruit_DHT.read(DHT_SENSOR, DHT_PIN)
+	if humidity is not None and temperature is not None:
+		print(f"Temperature = {temperature} °C")
+		print(f"Humidity = {humidity} %")
+		print("---------------------------")
+			# Publish to HiveMQ
+		client.publish(TEMP_TOPIC, temperature)
+		client.publish(HUM_TOPIC, humidity)
+		print("Data sent to HiveMQ\n")
+	else:
+		print("Sensor failure. Check wiring.")
+	time.sleep(10)
  
 ````
 
 ### OUPUT  
 Experiment 4A
 
-# FIGURE -04 ADD TITILE HERE 
+# FIGURE -04 Kit Image 
+<img width="720" height="1280" alt="WhatsApp Image 2026-05-12 at 2 32 36 PM" src="https://github.com/user-attachments/assets/665ec388-608e-4213-a6c0-7c6cf62f1449" />
 
-#  FIGURE -05 ADD TITILE HERE 
+#  FIGURE -05 Console output
+<img width="600" height="687" alt="Screenshot 2026-05-12 143014" src="https://github.com/user-attachments/assets/d66aca15-34a2-4a5c-bd19-05430a4209e9" />
 
-# FIGURE -06 ADD TITLE HERE 
+# FIGURE -06 Hive Mq Output 
+<img width="1915" height="1030" alt="Screenshot 2026-05-12 142947" src="https://github.com/user-attachments/assets/262b927b-6f5c-428a-81f9-f2fe1a2e8447" />
 
 Experiment 4B
 ## PROGRAM (Python)
