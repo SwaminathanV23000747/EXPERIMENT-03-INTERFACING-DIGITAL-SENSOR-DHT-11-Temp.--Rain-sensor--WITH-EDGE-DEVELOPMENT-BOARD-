@@ -121,7 +121,107 @@ Experiment 4A
 Experiment 4B
 ## PROGRAM (Python)
 ```
+import time
+import ssl
+import json
+import RPi.GPIO as GPIO
+import paho.mqtt.client as mqtt
 
+# =====================================================
+# GPIO SETUP
+# =====================================================
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setwarnings(False)
+
+RAIN_SENSOR_PIN = 18
+
+GPIO.setup(RAIN_SENSOR_PIN, GPIO.IN)
+
+# =====================================================
+# MQTT SETUP
+# =====================================================
+
+MQTT_BROKER = "c13064a8e3a0486283c8ea6a9e976744.s1.eu.hivemq.cloud"
+MQTT_PORT = 8883
+
+MQTT_USER = "hivemq.webclient.1779181723337"
+MQTT_PASSWORD = "Vy90QEuo,;<8*BXrt6Ml"
+
+MQTT_TOPIC = "raspberrypi/rain"
+
+client = mqtt.Client()
+
+client.username_pw_set(
+    MQTT_USER,
+    MQTT_PASSWORD
+)
+
+client.tls_set(
+    tls_version=ssl.PROTOCOL_TLS
+)
+
+# =====================================================
+# CONNECT TO HIVEMQ
+# =====================================================
+
+print("Connecting to HiveMQ Cloud...")
+
+client.connect(
+    MQTT_BROKER,
+    MQTT_PORT
+)
+
+client.loop_start()
+
+print("Connected Successfully")
+
+# =====================================================
+# MAIN LOOP
+# =====================================================
+
+try:
+
+    while True:
+
+        rain_value = GPIO.input(RAIN_SENSOR_PIN)
+
+        # ACTIVE LOW SENSOR
+        if rain_value == 0:
+
+            status = "RAIN DETECTED"
+            rain_status = 1
+
+        else:
+
+            status = "NO RAIN"
+            rain_status = 0
+
+        print(status)
+
+        payload = {
+            "rain_status": rain_status,
+            "message": status
+        }
+
+        client.publish(
+            MQTT_TOPIC,
+            json.dumps(payload)
+        )
+
+        print("Data Published")
+        print(payload)
+
+        time.sleep(5)
+
+except KeyboardInterrupt:
+
+    print("Program Stopped")
+
+    GPIO.cleanup()
+
+    client.loop_stop()
+    client.disconnect()
 
  
 
@@ -132,12 +232,15 @@ Experiment 4B
 
 ### OUPUT  
 
-# FIGURE -07 ADD TITILE HERE 
+# FIGURE -07 Kit image  
+<img width="1600" height="1200" alt="WhatsApp Image 2026-05-19 at 2 38 50 PM" src="https://github.com/user-attachments/assets/5f0d0cf8-d28c-4123-8cc6-37e01d916ef6" />
 
-#  FIGURE -08 ADD TITILE HERE 
+#  FIGURE -08  Output
+<img width="593" height="677" alt="Screenshot 2026-05-19 144324" src="https://github.com/user-attachments/assets/a9815016-02c8-4555-a05a-562b8c2ed2da" />
 
-# FIGURE -09 ADD TITLE HERE 
+<img width="1892" height="980" alt="Screenshot 2026-05-19 144254" src="https://github.com/user-attachments/assets/6bb97445-e4ef-4685-b87f-9df773294fab" />
 
+<img width="1907" height="978" alt="Screenshot 2026-05-19 144303" src="https://github.com/user-attachments/assets/dfd6d838-6b6f-4697-ba94-f02c4754e45b" />
 
 
 
